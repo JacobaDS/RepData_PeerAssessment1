@@ -32,7 +32,7 @@ g+geom_histogram(stat="identity") +ggtitle("Total number of steps taken each day
 ```
 
 3. Calculate and report the mean and median of the total number of steps taken per day
-```{r mean and median}
+```{r mean_and_median}
 Mean_steps_day <- round(mean(tmp1$Tot_steps_day,na.rm=TRUE))
 Mean_steps_day
 Median_steps_day <- median(tmp1$Tot_steps_day,na.rm=TRUE)
@@ -46,13 +46,13 @@ Median of the total number of steps taken per day: `r Median_steps_day`
 ## What is the average daily activity pattern?
 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, 
 averaged across all days (y-axis):
-```{r plot daily pattern}
+```{r plot_daily_pattern}
 tmp2 <- tbl_df(activity) %>% group_by(interval) %>% summarise(Mean_steps_int = mean(steps,na.rm=TRUE))
 plot(tmp2$interval,tmp2$Mean_steps_int,type="l",xlab = "5-minute interval", ylab = "average nr of steps", main="Daily activity pattern")
 ```
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
-```{r max interval}
+```{r max_interval}
 Max_steps_int <- max(tmp2$Mean_steps_int)
 Max_interval <- tmp2 %>% filter(Mean_steps_int == Max_steps_int)
 Max_interval[1,1] 
@@ -71,11 +71,11 @@ Answer: The total number of missing values in the dataset is `r Tot_NAs`
 2. Devise a strategy for filling in all of the missing values in the dataset.
 For example, you could use the mean for that 5-minute interval (Note: I have called this: Mean_steps_int).
 Step 2a: add Mean_steps_int to the original data (activity), using tmp2-dataframe from above:
-```{r inner join}
+```{r inner_join}
 tmp3 <- inner_join(activity,tmp2,by="interval") 
 ```
 Step 2b: filter on NAs ; overwrite steps with Mean_steps_int ; drop column Mean_steps_int :
-```{r fill NAs}
+```{r fill_NAs}
 tmp4 <- tbl_df(tmp3) %>% filter(is.na(steps)) %>% mutate(steps = Mean_steps_int) %>% select(steps,date,interval)
 ```
 3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
@@ -87,7 +87,7 @@ str(tmp6)
 ```
 
 4a. Make a histogram of the total number of steps taken each day
-```{r histogram 2}
+```{r histogram_2}
 tmp1b <- tbl_df(tmp6) %>%
     group_by(date) %>%
     summarise(Tot_steps_day = sum(steps))

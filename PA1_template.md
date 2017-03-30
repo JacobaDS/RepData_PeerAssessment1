@@ -69,7 +69,7 @@ tmp2 <- tbl_df(activity) %>% group_by(interval) %>% summarise(Mean_steps_int = m
 plot(tmp2$interval,tmp2$Mean_steps_int,type="l",xlab = "5-minute interval", ylab = "average nr of steps", main="Daily activity pattern")
 ```
 
-![](PA1_template_files/figure-html/plot daily pattern-1.png)<!-- -->
+![](PA1_template_files/figure-html/plot_daily_pattern-1.png)<!-- -->
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -139,7 +139,7 @@ g <- ggplot(tmp1b,aes(date,Tot_steps_day))
 g+geom_histogram(stat="identity") +ggtitle("Total number of steps taken each day")+xlab("Day")+ylab("Number of steps")
 ```
 
-![](PA1_template_files/figure-html/histogram 2-1.png)<!-- -->
+![](PA1_template_files/figure-html/histogram_2-1.png)<!-- -->
 
 4b. Calculate and report the mean and median total number of steps taken per day. 
 
